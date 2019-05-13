@@ -6,6 +6,10 @@
         <h1>Rock Paper Scissors</h1>
         <p>Click any of the buttons below to play</p>
         <h2 id=heading>Round 1</h2>
+        <div id=images>
+            <img src=images/question.png width=100px height=100px>
+            <img src=images/question.png width=100px height=100px>
+        </div>
         <div id=input>
         <input type=button value="Rock" onClick="play('rock')">
         <input type=button value="Paper" onClick="play('paper')">
@@ -55,6 +59,7 @@
             function play(playerSelection){
                 let computerSelection = computerPlay();
                 check(playerSelection,computerSelection);
+                document.getElementById("images").innerHTML = "<img src=images/"+playerSelection+".jpeg width=100px height=100px><img src=images/"+computerSelection+".jpeg width=100px height=100px>"
                 if(count == 5){
                     if(playerScore>computerScore) document.getElementById("heading").innerHTML="You win";
                     else if(computerScore>playerScore) document.getElementById("heading").innerHTML="Computer Wins";
