@@ -3,9 +3,19 @@
         <title>Rock Paper Scissors</title>
     </head>
     <body>
+        <h1>Rock Paper Scissors</h1>
+        <p>Click any of the buttons below to play</p>
+        <h2 id=heading>Round 1</h2>
+        <div id=input>
+        <input type=button value="Rock" onClick="play('rock')">
+        <input type=button value="Paper" onClick="play('paper')">
+        <input type=button value="Scissors" onClick="play('scissors')">
+        </div>
+        <div id=result></div>
         <script>
             let playerScore = 0;
             let computerScore = 0;
+            let count = 1;
 
             function computerPlay(){
                 let choices = ['rock','paper','scissors'];
@@ -13,46 +23,49 @@
             }
 
             function check(playerSelection,computerSelection){
-                if (playerSelection==computerSelection) return;
+                if (playerSelection==computerSelection){
+                    document.getElementById("result").innerHTML+="<p>Round "+count+" result: Draw</p>"
+                }
                 else if(playerSelection=="rock"&&computerSelection=='paper'){
                     computerScore++;
+                    document.getElementById("result").innerHTML+="<p>Round "+count+" result: Computer Wins</p>"
                 }
                 else if(playerSelection=="rock"&&computerSelection=='scissors'){
-                    playerScore++;   
+                    playerScore++;  
+                    document.getElementById("result").innerHTML+="<p>Round "+count+" result: Player Wins</p>"  
                 }
                 else if(playerSelection=="paper"&&computerSelection=='rock'){
-                    playerScore++;   
+                    playerScore++; 
+                    document.getElementById("result").innerHTML+="<p>Round "+count+" result: Player Wins</p>"   
                 }
                 else if(playerSelection=="paper"&&computerSelection=='scissors'){
                     computerScore++;
+                    document.getElementById("result").innerHTML+="<p>Round "+count+" result: Computer Wins</p>"
                 }
                 else if(playerSelection=="scissors"&&computerSelection=='rock'){
                     computerScore++; 
+                    document.getElementById("result").innerHTML+="<p>Round "+count+" result: Computer Wins</p>"
                 }
                 else if(playerSelection=="scissors"&&computerSelection=='paper'){
-                    playerScore++;   
+                    playerScore++;
+                    document.getElementById("result").innerHTML+="<p>Round "+count+" result: Player Wins</p>";   
                 }
-                else console.log("Invalid input");
             }
 
-            function game(){
+            function play(playerSelection){
                 let computerSelection = computerPlay();
-                let playerSelection = prompt("Enter any one: 1.Rock 2.Paper 3.Scissors").toLowerCase();
                 check(playerSelection,computerSelection);
-            }
-
-            function play(){
-                let count = 1;
-                while(count<=5){
-                    game();
+                if(count == 5){
+                    if(playerScore>computerScore) document.getElementById("heading").innerHTML="You win";
+                    else if(computerScore>playerScore) document.getElementById("heading").innerHTML="Computer Wins";
+                    else document.getElementById("heading").innerHTML = "Draw";
+                    document.getElementById("input").innerHTML="<input type=button onClick=location.reload() value=Restart>"
+                }
+                else {
                     count++;
+                    document.getElementById("heading").innerHTML="Round "+count;
                 }
             }
-
-            play();
-            if(playerScore>computerScore) console.log("You win");
-            else if(computerScore>playerScore) console.log("Computer Wins");
-            else console.log("Draw")
         </script>
     </body>
 </html>
