@@ -4,7 +4,55 @@
     </head>
     <body>
         <script>
-            console.log("Hello World");
+            let playerScore = 0;
+            let computerScore = 0;
+
+            function computerPlay(){
+                let choices = ['rock','paper','scissors'];
+                return choices[Math.floor(Math.random()*3)];
+            }
+
+            function check(playerSelection,computerSelection){
+                if (playerSelection==computerSelection) return;
+                else if(playerSelection=="rock"&&computerSelection=='paper'){
+                    computerScore++;
+                }
+                else if(playerSelection=="rock"&&computerSelection=='scissors'){
+                    playerScore++;   
+                }
+                else if(playerSelection=="paper"&&computerSelection=='rock'){
+                    playerScore++;   
+                }
+                else if(playerSelection=="paper"&&computerSelection=='scissors'){
+                    computerScore++;
+                }
+                else if(playerSelection=="scissors"&&computerSelection=='rock'){
+                    computerScore++; 
+                }
+                else if(playerSelection=="scissors"&&computerSelection=='paper'){
+                    playerScore++;   
+                }
+                else console.log("Invalid input");
+            }
+
+            function game(){
+                let computerSelection = computerPlay();
+                let playerSelection = prompt("Enter any one: 1.Rock 2.Paper 3.Scissors").toLowerCase();
+                check(playerSelection,computerSelection);
+            }
+
+            function play(){
+                let count = 1;
+                while(count<=5){
+                    game();
+                    count++;
+                }
+            }
+
+            play();
+            if(playerScore>computerScore) console.log("You win");
+            else if(computerScore>playerScore) console.log("Computer Wins");
+            else console.log("Draw")
         </script>
     </body>
 </html>
